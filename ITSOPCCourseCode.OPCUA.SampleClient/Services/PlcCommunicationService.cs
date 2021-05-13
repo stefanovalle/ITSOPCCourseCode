@@ -138,6 +138,10 @@ namespace ITSOPCCourseCode.OPCUA.SampleClient.Services
         {
             return Session.ReadValue(nodeId).Value;
         }
+        public Node ReadNode(string nodeId)
+        {
+            return Session.ReadNode(nodeId);
+        }
 
     }
 }

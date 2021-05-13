@@ -15,6 +15,8 @@ namespace ITSOPCCourseCode.OPCUA.SampleClient
             var valueRead = communicationService.ReadNodeValue("ns=6;s=MyLevel");
             Console.WriteLine($"Readed value: {valueRead}");
 
+            var node = communicationService.ReadNode("ns=6;s=MyLevel");
+
             var nodeList = communicationService.BrowseNode("ns=6;s=MyDevice");
 
             double valueToWrite = 33;
