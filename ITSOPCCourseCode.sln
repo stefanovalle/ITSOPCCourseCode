@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITSOPCCourseCode.Snap7.Exam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITSOPCCourseCode.Snap7.Library", "ITSOPCCourseCode.Snap7.Library\ITSOPCCourseCode.Snap7.Library.csproj", "{ED4F92DD-6874-4EF9-958C-96B894E95041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITSOPCCourseCode.OPCUA.SampleClient", "ITSOPCCourseCode.OPCUA.SampleClient\ITSOPCCourseCode.OPCUA.SampleClient.csproj", "{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITSOPCCourseCode.OPCUA.SampleClient", "ITSOPCCourseCode.OPCUA.SampleClient\ITSOPCCourseCode.OPCUA.SampleClient.csproj", "{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITSOPCCourseCode.OPCUA.SampleServer", "ITSOPCCourseCode.OPCUA.SampleServer\ITSOPCCourseCode.OPCUA.SampleServer.csproj", "{185202A1-15A1-48C1-8721-B0DBF0DA443B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,17 +18,19 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0A089BA8-B3BC-439C-8A93-83985B29C276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A089BA8-B3BC-439C-8A93-83985B29C276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A089BA8-B3BC-439C-8A93-83985B29C276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A089BA8-B3BC-439C-8A93-83985B29C276}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED4F92DD-6874-4EF9-958C-96B894E95041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED4F92DD-6874-4EF9-958C-96B894E95041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED4F92DD-6874-4EF9-958C-96B894E95041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED4F92DD-6874-4EF9-958C-96B894E95041}.Release|Any CPU.Build.0 = Release|Any CPU
 		{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{581A0F99-A6F0-49DC-8461-B4BE4C24CD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185202A1-15A1-48C1-8721-B0DBF0DA443B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185202A1-15A1-48C1-8721-B0DBF0DA443B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185202A1-15A1-48C1-8721-B0DBF0DA443B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185202A1-15A1-48C1-8721-B0DBF0DA443B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
