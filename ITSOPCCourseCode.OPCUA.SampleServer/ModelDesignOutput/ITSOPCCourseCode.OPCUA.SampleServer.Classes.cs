@@ -47,7 +47,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         /// <summary>
         /// The identifier for the Bike Object.
         /// </summary>
-        public const uint Bike = 1;
+        public const uint Bike = 2;
     }
     #endregion
 
@@ -62,7 +62,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         /// <summary>
         /// The identifier for the BikeType ObjectType.
         /// </summary>
-        public const uint BikeType = 3;
+        public const uint BikeType = 1;
     }
     #endregion
 
@@ -75,9 +75,24 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
     public static partial class Variables
     {
         /// <summary>
+        /// The identifier for the BikeType_CurrentSpeed Variable.
+        /// </summary>
+        public const uint BikeType_CurrentSpeed = 119;
+
+        /// <summary>
+        /// The identifier for the BikeType_CurrentSpeed_EURange Variable.
+        /// </summary>
+        public const uint BikeType_CurrentSpeed_EURange = 123;
+
+        /// <summary>
         /// The identifier for the Bike_CurrentSpeed Variable.
         /// </summary>
-        public const uint Bike_CurrentSpeed = 2;
+        public const uint Bike_CurrentSpeed = 3;
+
+        /// <summary>
+        /// The identifier for the Bike_CurrentSpeed_EURange Variable.
+        /// </summary>
+        public const uint Bike_CurrentSpeed_EURange = 111;
     }
     #endregion
 
@@ -120,9 +135,24 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
     public static partial class VariableIds
     {
         /// <summary>
+        /// The identifier for the BikeType_CurrentSpeed Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId BikeType_CurrentSpeed = new ExpandedNodeId(ITSOPCCourseCode.OPCUA.SampleServer.Variables.BikeType_CurrentSpeed, ITSOPCCourseCode.OPCUA.SampleServer.Namespaces.SamplePlant);
+
+        /// <summary>
+        /// The identifier for the BikeType_CurrentSpeed_EURange Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId BikeType_CurrentSpeed_EURange = new ExpandedNodeId(ITSOPCCourseCode.OPCUA.SampleServer.Variables.BikeType_CurrentSpeed_EURange, ITSOPCCourseCode.OPCUA.SampleServer.Namespaces.SamplePlant);
+
+        /// <summary>
         /// The identifier for the Bike_CurrentSpeed Variable.
         /// </summary>
         public static readonly ExpandedNodeId Bike_CurrentSpeed = new ExpandedNodeId(ITSOPCCourseCode.OPCUA.SampleServer.Variables.Bike_CurrentSpeed, ITSOPCCourseCode.OPCUA.SampleServer.Namespaces.SamplePlant);
+
+        /// <summary>
+        /// The identifier for the Bike_CurrentSpeed_EURange Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId Bike_CurrentSpeed_EURange = new ExpandedNodeId(ITSOPCCourseCode.OPCUA.SampleServer.Variables.Bike_CurrentSpeed_EURange, ITSOPCCourseCode.OPCUA.SampleServer.Namespaces.SamplePlant);
     }
     #endregion
 
@@ -135,12 +165,12 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         /// <summary>
         /// The BrowseName for the Bike component.
         /// </summary>
-        public const string Bike = "Bike";
+        public const string Bike = "My Bike";
 
         /// <summary>
         /// The BrowseName for the BikeType component.
         /// </summary>
-        public const string BikeType = "BikeType";
+        public const string BikeType = "A bike";
 
         /// <summary>
         /// The BrowseName for the CurrentSpeed component.
@@ -166,7 +196,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         public const string OpcUaXsd = "http://opcfoundation.org/UA/2008/02/Types.xsd";
 
         /// <summary>
-        /// The URI for the SamplePlant namespace (.NET code namespace is 'SamplePlant').
+        /// The URI for the SamplePlant namespace (.NET code namespace is 'ITSOPCCourseCode.OPCUA.SampleServer').
         /// </summary>
         public const string SamplePlant = "http://iiot.its/SamplePlant";
     }
@@ -228,18 +258,103 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         #region Initialization String
         private const string InitializationString =
            "AQAAABsAAABodHRwOi8vaWlvdC5pdHMvU2FtcGxlUGxhbnT/////BGCAAgEAAAABABAAAABCaWtlVHlw" +
-           "ZUluc3RhbmNlAQEDAAEBAwADAAAA/////wAAAAA=";
+           "ZUluc3RhbmNlAQEBAAEBAQABAAAA/////wEAAAAVYIkKAgAAAAEADAAAAEN1cnJlbnRTcGVlZAEBdwAA" +
+           "LwEAQAl3AAAAAAv/////AwP/////AQAAABVgiQoCAAAAAAAHAAAARVVSYW5nZQEBewAALgBEewAAAAEA" +
+           "dAP/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
 
         #region Public Properties
+        /// <remarks />
+        public AnalogItemState<double> CurrentSpeed
+        {
+            get
+            {
+                return m_currentSpeed;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_currentSpeed, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_currentSpeed = value;
+            }
+        }
         #endregion
 
         #region Overridden Methods
+        /// <summary>
+        /// Populates a list with the children that belong to the node.
+        /// </summary>
+        /// <param name="context">The context for the system being accessed.</param>
+        /// <param name="children">The list of children to populate.</param>
+        public override void GetChildren(
+            ISystemContext context,
+            IList<BaseInstanceState> children)
+        {
+            if (m_currentSpeed != null)
+            {
+                children.Add(m_currentSpeed);
+            }
+
+            base.GetChildren(context, children);
+        }
+
+        /// <summary>
+        /// Finds the child with the specified browse name.
+        /// </summary>
+        protected override BaseInstanceState FindChild(
+            ISystemContext context,
+            QualifiedName browseName,
+            bool createOrReplace,
+            BaseInstanceState replacement)
+        {
+            if (QualifiedName.IsNull(browseName))
+            {
+                return null;
+            }
+
+            BaseInstanceState instance = null;
+
+            switch (browseName.Name)
+            {
+                case ITSOPCCourseCode.OPCUA.SampleServer.BrowseNames.CurrentSpeed:
+                {
+                    if (createOrReplace)
+                    {
+                        if (CurrentSpeed == null)
+                        {
+                            if (replacement == null)
+                            {
+                                CurrentSpeed = new AnalogItemState<double>(this);
+                            }
+                            else
+                            {
+                                CurrentSpeed = (AnalogItemState<double>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = CurrentSpeed;
+                    break;
+                }
+            }
+
+            if (instance != null)
+            {
+                return instance;
+            }
+
+            return base.FindChild(context, browseName, createOrReplace, replacement);
+        }
         #endregion
 
         #region Private Fields
+        private AnalogItemState<double> m_currentSpeed;
         #endregion
     }
     #endif

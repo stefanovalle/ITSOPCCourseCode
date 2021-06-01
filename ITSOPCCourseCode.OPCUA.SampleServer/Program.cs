@@ -16,7 +16,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
             {
 
                 // load the application configuration.
-                application.LoadApplicationConfiguration(@"..\..\..\SampleServer.Config.xml", false).Wait();
+                application.LoadApplicationConfiguration(@"SampleServer.Config.xml", false).Wait();
 
                 // check the application certificate.
                 application.CheckApplicationInstanceCertificate(false, 0).Wait();

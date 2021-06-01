@@ -9,4 +9,13 @@
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua" Version="1.4.366.38" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.PredefinedNodes.uanodes">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleServer.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

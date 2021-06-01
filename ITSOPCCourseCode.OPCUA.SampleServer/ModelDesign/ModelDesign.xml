@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+xmlns:ua="http://opcfoundation.org/UA/"
+xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+
+xmlns="http://iiot.its/SamplePlant"
+TargetNamespace="http://iiot.its/SamplePlant"
+>
+  
+  <opc:Namespaces>
+    <opc:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+    <opc:Namespace Name="SamplePlant" Prefix="ITSOPCCourseCode.OPCUA.SampleServer">http://iiot.its/SamplePlant</opc:Namespace>
+  </opc:Namespaces>
+
+  <opc:ObjectType SymbolicName="BikeType" BaseType="ua:BaseObjectType">
+    <opc:BrowseName>A bike</opc:BrowseName>
+    <opc:Children>
+      <opc:Variable SymbolicName="CurrentSpeed" AccessLevel="ReadWrite" DataType="ua:Double" ValueRank="Scalar" TypeDefinition="ua:AnalogItemType" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:Object SymbolicName="Bike" TypeDefinition="BikeType">
+    <opc:BrowseName>My Bike</opc:BrowseName>
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>ua:ObjectsFolder</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Object>
+
+</opc:ModelDesign>

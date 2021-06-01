@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System;
 using Opc.Ua;
 using Opc.Ua.Server;
 using System.Reflection;
@@ -10,6 +10,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
     class SampleNodeManager : CustomNodeManager2
     {
         private static BikeState opcUaServer;
+        private Timer simulationTimer;
 
         public SampleNodeManager(IServerInternal server, ApplicationConfiguration configuration) : base(server, configuration)
         {
@@ -25,7 +26,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         {
             NodeStateCollection predefinedNodes = new NodeStateCollection();
             predefinedNodes.LoadFromBinaryResource(context,
-                @"..\..\..\ModelDesignOutput\SamplePlant.PredefinedNodes.uanodes",
+                @"ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.PredefinedNodes.uanodes",
                 typeof(SampleNodeManager).GetTypeInfo().Assembly,
                 true);
 
@@ -48,6 +49,20 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 
                 // replaces the untyped predefined nodes with their strongly typed versions.
                 AddPredefinedNode(SystemContext, opcUaServer);
+
+                simulationTimer = new Timer(DoSimulation, null, 1000, 1000);
+            }
+        }
+
+        private void DoSimulation(object state)
+        {
+            try
+            {
+                opcUaServer.CurrentSpeed.Value = new Random().Next(100);
+            }
+            catch (Exception e)
+            {
+                Utils.Trace(e, "Unexpected error doing simulation.");
             }
         }
     }
