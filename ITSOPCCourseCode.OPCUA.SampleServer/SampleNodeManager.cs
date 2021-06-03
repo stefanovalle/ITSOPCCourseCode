@@ -4,6 +4,7 @@ using System;
 using Opc.Ua;
 using Opc.Ua.Server;
 using System.Reflection;
+using System.IO;
 
 namespace ITSOPCCourseCode.OPCUA.SampleServer
 {
@@ -22,15 +23,30 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
             SetNamespaces(namespaceUrls);
         }
 
-        protected override NodeStateCollection LoadPredefinedNodes(ISystemContext context)
+        protected override void LoadPredefinedNodes(ISystemContext context, IDictionary<NodeId, IList<IReference>> externalReferences)
         {
             NodeStateCollection predefinedNodes = new NodeStateCollection();
-            predefinedNodes.LoadFromBinaryResource(context,
-                @"ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.PredefinedNodes.uanodes",
-                typeof(SampleNodeManager).GetTypeInfo().Assembly,
-                true);
 
-            return predefinedNodes;
+            Stream stream = new FileStream(@"ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.NodeSet2.xml", FileMode.Open);
+
+            //Stream stream = new FileStream(@"C:\Users\Stefano\UAModeler\SampleBike\samplebike.xml", FileMode.Open);
+
+            Opc.Ua.Export.UANodeSet nodeSet = Opc.Ua.Export.UANodeSet.Read(stream);
+
+            foreach (string namespaceUri in nodeSet.NamespaceUris)
+            {
+                SystemContext.NamespaceUris.GetIndexOrAppend(namespaceUri);
+            }
+            nodeSet.Import(SystemContext, predefinedNodes);
+
+            for (int ii = 0; ii < predefinedNodes.Count; ii++)
+            {
+                AddPredefinedNode(SystemContext, predefinedNodes[ii]);
+            }
+
+            // ensure the reverse refernces exist.
+            AddReverseReferences(externalReferences);
+
         }
 
         public override void CreateAddressSpace(IDictionary<NodeId, IList<IReference>> externalReferences)
@@ -49,21 +65,8 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 
                 // replaces the untyped predefined nodes with their strongly typed versions.
                 AddPredefinedNode(SystemContext, opcUaServer);
-
-                simulationTimer = new Timer(DoSimulation, null, 1000, 1000);
             }
         }
 
-        private void DoSimulation(object state)
-        {
-            try
-            {
-                opcUaServer.CurrentSpeed.Value = new Random().Next(100);
-            }
-            catch (Exception e)
-            {
-                Utils.Trace(e, "Unexpected error doing simulation.");
-            }
-        }
     }
 }
