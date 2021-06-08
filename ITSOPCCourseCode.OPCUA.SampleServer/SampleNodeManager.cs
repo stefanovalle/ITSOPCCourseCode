@@ -29,8 +29,6 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 
             Stream stream = new FileStream(@"ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.NodeSet2.xml", FileMode.Open);
 
-            //Stream stream = new FileStream(@"C:\Users\Stefano\UAModeler\SampleBike\samplebike.xml", FileMode.Open);
-
             Opc.Ua.Export.UANodeSet nodeSet = Opc.Ua.Export.UANodeSet.Read(stream);
 
             foreach (string namespaceUri in nodeSet.NamespaceUris)
