@@ -51,21 +51,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 
         public override void CreateAddressSpace(IDictionary<NodeId, IList<IReference>> externalReferences)
         {
-            lock (Lock)
-            {
-                LoadPredefinedNodes(SystemContext, externalReferences);
-
-                // find the untyped Batch Plant 1 node that was created when the model was loaded.
-                BaseObjectState passiveNode = (BaseObjectState)FindPredefinedNode(new NodeId(Objects.Bike,
-                    NamespaceIndexes[0]), typeof(BaseObjectState));
-
-                // convert the untyped node to a typed node that can be manipulated within the server.
-                opcUaServer = new BikeState(null);
-                opcUaServer.Create(SystemContext, passiveNode);
-
-                // replaces the untyped predefined nodes with their strongly typed versions.
-                AddPredefinedNode(SystemContext, opcUaServer);
-            }
+            LoadPredefinedNodes(SystemContext, externalReferences);
         }
 
     }
