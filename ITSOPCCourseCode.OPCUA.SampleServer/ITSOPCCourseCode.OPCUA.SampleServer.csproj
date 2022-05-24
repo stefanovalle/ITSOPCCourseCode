@@ -10,15 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.NodeSet2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.PredefinedNodes.uanodes">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="NodeSet\samplebike.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SampleServer.Config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UAModelerExample\" />
+    <Folder Include="NodeSet\" />
   </ItemGroup>
 
 </Project>

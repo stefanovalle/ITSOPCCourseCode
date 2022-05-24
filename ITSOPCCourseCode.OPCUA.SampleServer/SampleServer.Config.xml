@@ -5,8 +5,8 @@
   xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd"
 >
   <ApplicationName>ITS Sample OPC UA Server</ApplicationName>
-  <ApplicationUri>urn:localhost:ITSOPCCourseCode.OPCUA.SampleServer</ApplicationUri>
-  <ProductUri>http://iiot.its/SamplePlant</ProductUri>
+  <ApplicationUri>urn:localhost:ITSOPCCourseCode.OPCUA.SampleBike</ApplicationUri>
+  <ProductUri>http://iiot.its/SampleBike</ProductUri>
   <ApplicationType>Server_0</ApplicationType>
 
   <SecurityConfiguration>
@@ -55,7 +55,7 @@
   </TransportQuotas>
   <ServerConfiguration>
     <BaseAddresses>
-      <ua:String>opc.tcp://localhost:26543/SampleServer</ua:String>
+      <ua:String>opc.tcp://localhost:26543/SampleBike</ua:String>
     </BaseAddresses>
     <SecurityPolicies>
       <ServerSecurityPolicy>

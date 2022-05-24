@@ -27,7 +27,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 
             properties.ManufacturerName = "MV Labs";
             properties.ProductName = "ITS Sample OPC UA Server";
-            properties.ProductUri = "http://iiot.its/SamplePlant";
+            properties.ProductUri = "http://iiot.its/SampleBike";
             properties.SoftwareVersion = Utils.GetAssemblySoftwareVersion();
             properties.BuildNumber = Utils.GetAssemblyBuildNumber();
             properties.BuildDate = Utils.GetAssemblyTimestamp();

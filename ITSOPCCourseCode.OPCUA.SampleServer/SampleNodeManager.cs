@@ -10,16 +10,13 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
 {
     class SampleNodeManager : CustomNodeManager2
     {
-        private static BikeState opcUaServer;
-        private Timer simulationTimer;
-
         public SampleNodeManager(IServerInternal server, ApplicationConfiguration configuration) : base(server, configuration)
         {
             SystemContext.NodeIdFactory = this;
 
             string[] namespaceUrls = new string[2];
-            namespaceUrls[0] = Namespaces.SamplePlant;
-            namespaceUrls[1] = Namespaces.SamplePlant + "/Instance";
+            namespaceUrls[0] = "http://iiot.its/SampleBike";
+            namespaceUrls[1] = "http://iiot.its/SampleBike/Instance";
             SetNamespaces(namespaceUrls);
         }
 
@@ -27,7 +24,7 @@ namespace ITSOPCCourseCode.OPCUA.SampleServer
         {
             NodeStateCollection predefinedNodes = new NodeStateCollection();
 
-            Stream stream = new FileStream(@"ModelDesignOutput\ITSOPCCourseCode.OPCUA.SampleServer.NodeSet2.xml", FileMode.Open);
+            Stream stream = new FileStream(@"NodeSet\samplebike.xml", FileMode.Open);
 
             Opc.Ua.Export.UANodeSet nodeSet = Opc.Ua.Export.UANodeSet.Read(stream);
 

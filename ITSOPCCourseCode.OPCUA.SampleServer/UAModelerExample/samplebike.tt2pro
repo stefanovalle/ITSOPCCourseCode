@@ -1,0 +1,33 @@
+###########################
+# UaModeler Project File  #
+# Generated at 24.05.2022 #
+###########################
+
+PROJECTNAME = SampleBike
+
+TEMPLATESET = ($TEMPLATES)/net/v3_0/t2/net_server.tt2set
+
+MODELS += ($MODELS)/Opc.Ua.NodeSet2.ua \
+    samplebike.ua
+
+VARIABLES+= samplebike.ua: Namespace=iiot; Organization=ITS; 
+
+COLORS = ($MODELS)/Opc.Ua.NodeSet2.ua: #0000ff\
+    samplebike.ua: #008000
+
+PROJECTVARIABLES += GenerateDefaultApplication = true \
+    GeneratePackagesConfig =  \
+    NetFramework = 3.5 \
+    ProjectNamespace = SampleBike \
+    ProjectOrganization = ITS
+
+OUTPUTPATH = SampleBike
+
+GENERATE += samplebike.ua
+
+NODEACCESSINFOROLES += Administrator \
+    SecurityAdmin \
+    ConfigurationAdmin \
+    Operator \
+    Observer
+
