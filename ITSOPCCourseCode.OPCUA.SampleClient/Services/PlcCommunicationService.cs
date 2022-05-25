@@ -13,6 +13,8 @@ namespace ITSOPCCourseCode.OPCUA.SampleClient.Services
     {
         private Session Session;
         private bool IsSessionStarted = false;
+        public event EventHandler<NodeValueChangedNotification> NodeValueChanged;
+
         public PlcCommunicationService()
         { }
 
@@ -141,6 +143,33 @@ namespace ITSOPCCourseCode.OPCUA.SampleClient.Services
         public Node ReadNode(string nodeId)
         {
             return Session.ReadNode(nodeId);
+        }
+        public void SubscribeToNodeChanges(IEnumerable<string> nodeIds, int updateDelay)
+        {
+            var subscription = new Subscription(Session.DefaultSubscription) { PublishingInterval = updateDelay };
+
+            var items = nodeIds.Select(x => new MonitoredItem { StartNodeId = x }).ToList();
+
+            foreach (var item in items)
+            {
+                item.Notification += OnChange;
+            }
+
+            subscription.AddItems(items);
+
+            Session.AddSubscription(subscription);
+
+            subscription.Create();
+        }
+
+        private void OnChange(MonitoredItem item, MonitoredItemNotificationEventArgs e)
+        {
+            foreach (DataValue value in item.DequeueValues())
+            {
+                var v = value.Value;
+
+                NodeValueChanged(this, new NodeValueChangedNotification(item.StartNodeId.ToString(), v));
+            }
         }
 
     }

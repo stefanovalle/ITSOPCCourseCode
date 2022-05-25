@@ -1,6 +1,7 @@
 ﻿using ITSOPCCourseCode.OPCUA.SampleClient.Services;
 using ITSOPCCourseCode.OPCUA.SampleClient.DTO;
 using System;
+using System.Collections.Generic;
 
 namespace ITSOPCCourseCode.OPCUA.SampleClient
 {
@@ -23,6 +24,22 @@ namespace ITSOPCCourseCode.OPCUA.SampleClient
 
             communicationService.WriteToNode(new NodeWritingRequest<double>("ns=6;s=MyLevel", valueToWrite));
 
+            //Subscription
+            var items = new List<string>();
+            items.Add("ns=6;s=MyLevel");
+
+            communicationService.SubscribeToNodeChanges(items, 1000);
+
+            communicationService
+                .NodeValueChanged += PlcCommunicationService_NodeValueChanged;
+
+            Console.Read();
+
+        }
+
+        private static void PlcCommunicationService_NodeValueChanged(object sender, NodeValueChangedNotification e)
+        {
+            Console.WriteLine($"Node {e.NodeId} with value {e.Value}");
         }
     }
 }
