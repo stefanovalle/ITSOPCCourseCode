@@ -1,0 +1,31 @@
+###########################
+# UaModeler Project File  #
+# Generated at 27.06.2024 #
+###########################
+
+PROJECTNAME = Irrigazione
+
+TEMPLATESET = ($TEMPLATES)/net/v3_3/t1/net_server.tt2set
+
+MODELS += ($MODELS)/Opc.Ua.NodeSet2.ua \
+    irrigazione.ua
+
+VARIABLES+= irrigazione.ua: Namespace=diqu; Organization=its; 
+
+COLORS = ($MODELS)/Opc.Ua.NodeSet2.ua: #0000ff\
+    irrigazione.ua: #0000ff
+
+PROJECTVARIABLES += GenerateDefaultApplication = false \
+    GeneratePackagesConfig = false \
+    NetFramework = 4.5 \
+    ProjectNamespace = Irrigazione \
+    ProjectOrganization = 
+
+OUTPUTPATH = 
+
+NODEACCESSINFOROLES += Administrator \
+    SecurityAdmin \
+    ConfigurationAdmin \
+    Operator \
+    Observer
+
