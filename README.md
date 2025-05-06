@@ -1,3 +1,3 @@
 # Corso OPC
 
-Esempi ed esercizi per il modulo su OPC / OPC-UA - corso IIoT 2024.
+Esempi ed esercizi per il modulo su OPC / OPC-UA - corso IIoT 2025.
