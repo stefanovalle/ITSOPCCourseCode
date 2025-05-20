@@ -1,11 +1,11 @@
 ###########################
 # UaModeler Project File  #
-# Generated at 24.05.2022 #
+# Generated at 20.05.2025 #
 ###########################
 
 PROJECTNAME = SampleBike
 
-TEMPLATESET = ($TEMPLATES)/net/v3_0/t2/net_server.tt2set
+TEMPLATESET = ($TEMPLATES)/net/v4_1/t1/net_server.tt2set
 
 MODELS += ($MODELS)/Opc.Ua.NodeSet2.ua \
     samplebike.ua
@@ -16,12 +16,15 @@ COLORS = ($MODELS)/Opc.Ua.NodeSet2.ua: #0000ff\
     samplebike.ua: #008000
 
 PROJECTVARIABLES += GenerateDefaultApplication = true \
-    GeneratePackagesConfig =  \
-    NetFramework = 3.5 \
+    LegacyOutput = false \
+    NetFramework = 4.6.2 \
+    NoMethodFiles = false \
     ProjectNamespace = SampleBike \
-    ProjectOrganization = ITS
+    ProjectOrganization = ITS \
+    PubSubMqttJson = false \
+    RolesAndUsers = false
 
-OUTPUTPATH = SampleBike
+OUTPUTPATH = .
 
 GENERATE += samplebike.ua
 
